@@ -53,6 +53,12 @@ public class PatientProceduresServlet extends HttpServlet {
 		String firstName = request.getParameter("patientFirstName");
 		String lastName = request.getParameter("patientLastName");
 		String procedureCode = request.getParameter("procedureCode");
+		if (procedureCode.length() == 0)
+			procedureCode = "%";
+		if (firstName.length() == 0)
+			firstName = "%";
+		if (lastName.length() == 0)
+			lastName = "%";
 		
 		response.setContentType("text/html");   
 		PrintWriter out = response.getWriter();
@@ -76,7 +82,7 @@ public class PatientProceduresServlet extends HttpServlet {
 			ResultSet rs = pstmt.executeQuery();
 			
 			out.println("<!DOCTYPE HTML><html><body>");
-			out.println("<table> <tr><th>First Name</th><th>Last Name</th> <th>Procedure</th><th>Procedure Description</th></tr>");
+			out.println("<table> <tr><th>First Name</th><th>Last Name</th> <th>Procedure Description</th><th>Procedure Date</th></tr>");
 			while (rs.next()) {
 				out.println("<tr>");
 				out.println("<td>"+rs.getString("FirstName")+"</td>");
