@@ -7,6 +7,13 @@
  * Minimal exception handling is present; only the stack trace is 
  * retained.
  * 
+ * 
+ * Precondition: The database is in place and accessible
+ * with the proper tables and columns
+ * 
+ * Postcondition: on success, the requested
+ * procedures list will be displayed as HTML
+ * 
  */
 
 

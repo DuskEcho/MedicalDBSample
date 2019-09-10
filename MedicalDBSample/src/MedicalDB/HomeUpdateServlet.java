@@ -4,7 +4,7 @@
  * 
  * The following program retrieves patient name and procedure
  * information from a view intended to give an overview
- * of current ongoing conditions
+ * of current ongoing conditions.  
  * 
  */
 

@@ -2,20 +2,20 @@
  * Greg Brown
  * SAGA (Team 2)
  * 
- * The following servlet retrieves visits
- * from the MedicalDB using JDBC and MySQL.
- * Visits are displayed beginning with the most 
- * recent. Data is pulled from the PatientVisits.html 
- * page.
+ * The following servlet logs a new "procedure"
+ * to the MedicalDB using JDBC and MySQL. 
+ * Data is pulled from the PatientProcedures.html 
+ * page.  On success, the user is notified of the 
+ * number of updated rows (should always be 1 if
+ * successful). 
  * 
  * 
  * Precondition: The database is in place and accessible
  * with the proper tables and columns
  * 
- * Postcondition: on success, the requested
- * visit list will be displayed as HTML
+ * Postcondition: on success, the database
+ * will be modified with an additional row.
  */
-
 
 package MedicalDB;
 
@@ -24,7 +24,6 @@ import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -35,10 +34,10 @@ import javax.servlet.http.HttpServletResponse;
 /**
  * Core servlet implementation
  */
-@WebServlet("/PatientVisitsServlet")
-public class PatientVisitsServlet extends HttpServlet {
+@WebServlet("/AddProcedureServlet")
+public class AddProcedureServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-    
+
 	// JDBC driver name and database URL
 	static final String JDBC_DRIVER = "com.mysql.cj.jdbc.Driver";
 	static final String DB_URL = "jdbc:mysql://localhost/medicaldb";
@@ -48,10 +47,9 @@ public class PatientVisitsServlet extends HttpServlet {
 	static final String PASS = "sesame80";
 	
 	// SQL statements
-	String originalSql = "SELECT FirstName, LastName, VisitDescription, VisitDate\r\n" + 
-			"FROM Patient p \r\n" + 
-			"JOIN visit v ON p.PatientId = v.PatientId"
-			+ " WHERE FirstName LIKE ? AND LastName LIKE ? AND ";
+	String usql = "INSERT INTO procedures (PatientID, ProcedureDescription, ProcedureDate, ConditionID, Result)\r\n" + 
+			"VALUES ( \r\n" + 
+			"(SELECT PatientID FROM patient WHERE FirstName = ? AND LastName = ?), ?, ?, ?, ?);";
 
 	protected void doPost(HttpServletRequest request,
                         HttpServletResponse response)
@@ -61,20 +59,10 @@ public class PatientVisitsServlet extends HttpServlet {
 		PreparedStatement pstmt = null;
 		String firstName = request.getParameter("patientFirstName");
 		String lastName = request.getParameter("patientLastName");
-		boolean visitComplete = (request.getParameter("visitCompleted").contains("Yes"));
-		String visitCompleteBool = "false";
-		String completionStatus = "Incomplete Visits";
-		if (visitComplete)
-		{
-			completionStatus = "Completed Visits";
-			visitCompleteBool = "true";
-		}
-		if (firstName.length() == 0)
-			firstName = "%";
-		if (lastName.length() == 0)
-			lastName = "%";
-		
-		String sql = originalSql + "v.Completed = " + visitCompleteBool + " ORDER BY VisitDate DESC;";
+		String description = request.getParameter("procedureDescription");
+		String procedureDate = request.getParameter("procedureDate");
+		String conditionID = request.getParameter("conditionID");
+		String result = request.getParameter("result");
 		
 		response.setContentType("text/html");   
 		PrintWriter out = response.getWriter();
@@ -90,26 +78,20 @@ public class PatientVisitsServlet extends HttpServlet {
 
 			// now prepare and execute update or insert 
 			// sql statement
-			pstmt = conn.prepareStatement(sql);
+			pstmt = conn.prepareStatement(usql);
 			pstmt.setString(1, firstName);
 			pstmt.setString(2, lastName);
-			
-			ResultSet rs = pstmt.executeQuery();
+			pstmt.setString(3, description);
+			pstmt.setString(4, procedureDate);
+			pstmt.setString(5, conditionID);
+			pstmt.setString(6, result);
+
+			int nrows = pstmt.executeUpdate();
+
 			
 			out.println("<!DOCTYPE HTML><html><body>");
-			out.println("<h1>" + completionStatus + "</h1>");
-			out.println("<table> <tr><th>First Name</th><th>Last Name</th> <th>Visit Summary</th><th>Visit Date</th></tr>");
-			while (rs.next()) {
-				out.println("<tr>");
-				out.println("<td>"+rs.getString("FirstName")+"</td>");
-				out.println("<td>"+rs.getString("LastName")+"</td>");
-				out.println("<td>"+rs.getString("VisitDescription")+"</td>");
-				out.println("<td>"+rs.getString("VisitDate")+"</td>");
-				out.println("</tr>");
-			}
-			rs.close();
-			out.println("</table>");
-			out.println("</body></html>");
+			out.println("<p>" + nrows + " Rows Updated</p>");
+			out.println("<a href=\"Home.html\">Back to the homepage</a>");
 			
 			pstmt.close();
 			conn.close();

@@ -1,3 +1,24 @@
+/*
+ * Greg Brown
+ * SAGA (Team 2)
+ * 
+ * The following servlet schedules a new visit
+ * to the MedicalDB Using JDBC and MySQL.
+ * Data is pulled from the PatientVisits.html page.
+ * Visits are assumed to be in the future
+ * and as such will always set "completed" to "false".
+ * The user is notified of the number of rows updated 
+ * (should always be 1 on success).
+ * 
+
+ * Precondition: The database is in place and accessible
+ * with the proper tables and columns
+ * 
+ * Postcondition: on success, the database
+ * will be modified with an additional row.
+ * 
+ */
+
 package MedicalDB;
 
 import java.io.IOException;
@@ -13,7 +34,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Servlet implementation class AddVisitServlet
+ * Core servlet implementation
  */
 @WebServlet("/AddVisitServlet")
 public class AddVisitServlet extends HttpServlet {
