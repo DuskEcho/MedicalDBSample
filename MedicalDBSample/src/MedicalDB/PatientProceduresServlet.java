@@ -44,7 +44,7 @@ public class PatientProceduresServlet extends HttpServlet {
 	String sql = "SELECT FirstName, LastName, ProcedureDescription, ProcedureDate FROM patient NATURAL JOIN procedures "
 			+ "WHERE FirstName LIKE ? AND LastName LIKE ? AND ProcedureID LIKE ?";
 
-	protected void doGet(HttpServletRequest request,
+	protected void doPost(HttpServletRequest request,
                           HttpServletResponse response)
 			throws ServletException, IOException {
 
