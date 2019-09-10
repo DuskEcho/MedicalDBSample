@@ -29,11 +29,10 @@ public class PatientVisitsServlet extends HttpServlet {
 	static final String PASS = "sesame80";
 	
 	// SQL statements
-	String sql = "SELECT FirstName, LastName, VisitDescription, VisitDate\r\n" + 
+	String originalSql = "SELECT FirstName, LastName, VisitDescription, VisitDate\r\n" + 
 			"FROM Patient p \r\n" + 
 			"JOIN visit v ON p.PatientId = v.PatientId"
-			+ " WHERE FirstName LIKE ? AND LastName LIKE ?"
-			+ "ORDER BY VisitDate DESC;";
+			+ " WHERE FirstName LIKE ? AND LastName LIKE ? AND ";
 
 	protected void doPost(HttpServletRequest request,
                         HttpServletResponse response)
@@ -43,14 +42,20 @@ public class PatientVisitsServlet extends HttpServlet {
 		PreparedStatement pstmt = null;
 		String firstName = request.getParameter("patientFirstName");
 		String lastName = request.getParameter("patientLastName");
-		boolean visitComplete = (request.getParameter("visitCompleted") == "Yes");
+		boolean visitComplete = (request.getParameter("visitCompleted").contains("Yes"));
+		String visitCompleteBool = "false";
 		String completionStatus = "Incomplete Visits";
 		if (visitComplete)
+		{
 			completionStatus = "Completed Visits";
+			visitCompleteBool = "true";
+		}
 		if (firstName.length() == 0)
 			firstName = "%";
 		if (lastName.length() == 0)
 			lastName = "%";
+		
+		String sql = originalSql + "v.Completed = " + visitCompleteBool + " ORDER BY VisitDate DESC;";
 		
 		response.setContentType("text/html");   
 		PrintWriter out = response.getWriter();
