@@ -1,28 +1,60 @@
 <!DOCTYPE html>
 <html>
-<head>
-	<meta charset="ISO-8859-1">
-	<title>SAGA MDB - Visits</title>
-</head>
-<body>
-	<h1> Patient Visits</h1>
-	<p>Leave blank for wildcard value</p>
-	<form action="PatientVisitsServlet" id="getVisitsForm" method="POST"> <!-- post hides sensitive information in URL --> 
+	<head>
+		<meta charset="ISO-8859-1">
+		<title>SAGA MDB - Visits</title>
+	</head>
+	<body>
+		<h1> Patient Visits</h1>
+	
+		<br/>
+		<br/>
+		<br/>
+	
+		<h2>Lok Up Visits</h2>
+		<p>Leave blank for wildcard value</p>
+		<form action="PatientVisitsServlet" id="getVisitsForm" method="POST"> <!-- post hides sensitive information in URL --> 
+			<table>
+				<tr>
+					<th>First Name</th>
+					<th>Last Name</th>
+					<th>Completed</th>
+				</tr>
+				<tr>
+					<td><input type="text" name="patientFirstName"/></td>
+					<td><input type="text" name="patientLastName"/></td>
+					<td>
+						<select name="visitCompleted" form="getVisitsForm">
+							<option value="Yes">Yes</option>
+							<option value="No">No</option>
+						</select>
+					</td>
+				</tr>
+			</table>
+			<br/>
+			<input type=submit value="do the thing"/>
+		</form>
+	
+		<br/>
+		<br/>
+		<br/>
+	
+
+		<h2>Schedule New Visit</h2>
+		<p>Date in format 'YYYY-MM-DD' without quotes</p>
+		<form action="AddVisitServlet" method="POST"> <!-- post hides sensitive information in URL --> 
 		<table>
 			<tr>
 				<th>First Name</th>
 				<th>Last Name</th>
-				<th>Completed</th>
+				<th>Visit Description</th>
+				<th>Visit Date</th>
 			</tr>
 			<tr>
 				<td><input type="text" name="patientFirstName"/></td>
 				<td><input type="text" name="patientLastName"/></td>
-				<td>
-					<select name="visitCompleted" form="getVisitsForm">
-						<option value="Yes">Yes</option>
-						<option value="No">No</option>
-					</select>
-				</td>
+				<td><input type="text" name="visitDescription"/></td>
+				<td><input type="text" name="visitDate"/></td>
 			</tr>
 		</table>
 		<br/>
