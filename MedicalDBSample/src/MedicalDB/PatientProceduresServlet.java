@@ -77,6 +77,8 @@ public class PatientProceduresServlet extends HttpServlet {
 			// Open a connection
 			conn = DriverManager.getConnection(
                     DB_URL, USER, PASS);
+			conn.setTransactionIsolation(Connection.TRANSACTION_SERIALIZABLE);; // serializeable
+			conn.setAutoCommit(false);
 
 
 			// now prepare and execute update or insert 
@@ -85,8 +87,8 @@ public class PatientProceduresServlet extends HttpServlet {
 			pstmt.setString(1, firstName);
 			pstmt.setString(2, lastName);
 			pstmt.setString(3, procedureCode);
-			
 			ResultSet rs = pstmt.executeQuery();
+			conn.commit();
 			
 			out.println("<!DOCTYPE HTML><html><body>");
 			out.println("<table> <tr><th>First Name</th><th>Last Name</th> <th>Procedure Description</th><th>Procedure Date</th></tr>");

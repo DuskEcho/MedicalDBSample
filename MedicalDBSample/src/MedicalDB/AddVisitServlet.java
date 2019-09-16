@@ -73,6 +73,8 @@ public class AddVisitServlet extends HttpServlet {
 			// Open a connection
 			conn = DriverManager.getConnection(
                   DB_URL, USER, PASS);
+			conn.setTransactionIsolation(Connection.TRANSACTION_SERIALIZABLE);; // serializeable
+			conn.setAutoCommit(false);
 
 
 			// now prepare and execute update or insert 
@@ -84,7 +86,7 @@ public class AddVisitServlet extends HttpServlet {
 			pstmt.setString(4, visitDate);
 
 			int nrows = pstmt.executeUpdate();
-
+			conn.commit();
 			
 			out.println("<!DOCTYPE HTML><html><body>");
 			out.println("<p>" + nrows + " Rows Updated</p>");

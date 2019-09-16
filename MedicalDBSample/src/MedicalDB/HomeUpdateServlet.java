@@ -59,12 +59,15 @@ public class HomeUpdateServlet extends HttpServlet {
 			// Open a connection
 			conn = DriverManager.getConnection(
                     DB_URL, USER, PASS);
+			conn.setTransactionIsolation(Connection.TRANSACTION_SERIALIZABLE);; // serializeable
+			conn.setAutoCommit(false);
 
 
 			// now prepare and execute update or insert 
 			// sql statement
 			pstmt = conn.prepareStatement(sql);
 			ResultSet rs = pstmt.executeQuery();
+			conn.commit();
 			
 			out.println("<!DOCTYPE HTML><html><body>");
 			out.println("<h1>Recent Occurrences</h1>");
