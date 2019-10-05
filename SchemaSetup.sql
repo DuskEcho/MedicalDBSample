@@ -56,7 +56,7 @@ CREATE TABLE IF NOT EXISTS `MedicalDB`.`Visit` (
   `Completed` TINYINT NOT NULL,
   `PatientID` INT NOT NULL,
   `ConditionID` INT NULL DEFAULT NULL,
-  `PhysiciansID` INT NOT NULL,
+  `PhysicianID` INT NOT NULL,
   PRIMARY KEY (`VisitID`),
   INDEX `PatientID_idx` (`PatientID` ASC) VISIBLE,
   INDEX `FK_Condition_idx` (`ConditionID` ASC, `PatientID` ASC) VISIBLE,
