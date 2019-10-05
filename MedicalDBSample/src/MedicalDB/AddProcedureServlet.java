@@ -47,9 +47,9 @@ public class AddProcedureServlet extends HttpServlet {
 	static final String PASS = "sesame80";
 	
 	// SQL statements
-	String usql = "INSERT INTO procedures (PatientID, ProcedureDescription, ProcedureDate, ConditionID, Result)\r\n" + 
+	String usql = "INSERT INTO procedures (PatientID, ProcedureDescription, ProcedureDate, ConditionID, Result, PhysicianID)\r\n" + 
 			"VALUES ( \r\n" + 
-			"(SELECT PatientID FROM patient WHERE FirstName = ? AND LastName = ?), ?, ?, ?, ?);";
+			"(SELECT PatientID FROM patient WHERE FirstName = ? AND LastName = ?), ?, ?, ?, ?, ?);";
 
 	protected void doPost(HttpServletRequest request,
                         HttpServletResponse response)
@@ -63,6 +63,7 @@ public class AddProcedureServlet extends HttpServlet {
 		String procedureDate = request.getParameter("procedureDate");
 		String conditionID = request.getParameter("conditionID");
 		String result = request.getParameter("result");
+		String physician = request.getParameter("dr");
 		
 		response.setContentType("text/html");   
 		PrintWriter out = response.getWriter();
@@ -86,9 +87,13 @@ public class AddProcedureServlet extends HttpServlet {
 			pstmt.setString(4, procedureDate);
 			pstmt.setString(5, conditionID);
 			pstmt.setString(6, result);
+			pstmt.setString(7, physician);
 
+			out.println("<!DOCTYPE HTML><html><body>");
+			out.println("<p>wut</p>");
 			int nrows = pstmt.executeUpdate();
 			conn.commit();
+            conn.setAutoCommit(true);
 			
 			out.println("<!DOCTYPE HTML><html><body>");
 			out.println("<p>" + nrows + " Rows Updated</p>");
