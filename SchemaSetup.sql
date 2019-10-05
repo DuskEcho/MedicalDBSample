@@ -21,15 +21,15 @@ USE `MedicalDB` ;
 -- Table `MedicalDB`.`Patient`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `MedicalDB`.`Patient` (
-  `PatientID` INT NOT NULL,
+  `PatientID` INT NOT NULL AUTO_INCREMENT,
   `FirstName` VARCHAR(45) NOT NULL,
   `LastName` VARCHAR(45) NOT NULL,
   `Bday` VARCHAR(45) NOT NULL,
   `Phone` VARCHAR(45) NOT NULL,
   `EmergencyFirstName` VARCHAR(45) NOT NULL,
   `EmergencyLastName` VARCHAR(45) NOT NULL,
-  `Weight` DECIMAL(2) NOT NULL,
-  `Height` DECIMAL(2) NOT NULL,
+  `Weight` DECIMAL(5,2) NOT NULL,
+  `Height` DECIMAL(3,2) NOT NULL,
   `BloodType` VARCHAR(45) NOT NULL,
   PRIMARY KEY (`PatientID`))
 ENGINE = InnoDB;
@@ -50,7 +50,7 @@ ENGINE = InnoDB;
 -- Table `MedicalDB`.`Visit`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `MedicalDB`.`Visit` (
-  `VisitID` INT NOT NULL,
+  `VisitID` INT NOT NULL AUTO_INCREMENT,
   `VisitDescription` VARCHAR(45) NOT NULL,
   `VisitDate` DATE NOT NULL,
   `Completed` TINYINT NOT NULL,
@@ -83,7 +83,7 @@ ENGINE = InnoDB;
 -- Table `MedicalDB`.`Condition`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `MedicalDB`.`Condition` (
-  `ConditionID` INT NOT NULL,
+  `ConditionID` INT NOT NULL AUTO_INCREMENT,
   `ConditionDescription` VARCHAR(45) NOT NULL,
   `CurrentlyActive` TINYINT NOT NULL,
   `PatientID` INT NOT NULL,
