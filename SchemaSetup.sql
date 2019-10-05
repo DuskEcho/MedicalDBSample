@@ -28,7 +28,6 @@ CREATE TABLE IF NOT EXISTS `MedicalDB`.`Patient` (
   `Phone` VARCHAR(45) NOT NULL,
   `EmergencyFirstName` VARCHAR(45) NOT NULL,
   `EmergencyLastName` VARCHAR(45) NOT NULL,
-  `InsuranceProvider` VARCHAR(45) NOT NULL,
   `Weight` DECIMAL(2) NOT NULL,
   `Height` DECIMAL(2) NOT NULL,
   `BloodType` VARCHAR(45) NOT NULL,
