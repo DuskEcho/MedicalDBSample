@@ -40,7 +40,14 @@ public class HomeUpdateServlet extends HttpServlet {
 	static final String PASS = "sesame80";
 	
 	// SQL statements
-	String sql = "SELECT * FROM RecentActivity";
+	String usql = "CREATE OR REPLACE VIEW RecentActivity as\r\n" + 
+			"(SELECT LastName, FirstName, ConditionDescription, VisitDate\r\n" + 
+			"FROM visit v\r\n" + 
+			"JOIN patient pa ON v.PatientID = pa.PatientId\r\n" + 
+			"JOIN conditions c ON v.PatientID = c.patientID\r\n" + 
+			"WHERE c.CurrentlyActive = true\r\n" + 
+			"ORDER BY VisitDate DESC);";
+	String sql = "SELECT * FROM RecentActivity;";
 
 	protected void doGet(HttpServletRequest request,
                           HttpServletResponse response)
@@ -65,6 +72,8 @@ public class HomeUpdateServlet extends HttpServlet {
 
 			// now prepare and execute update or insert 
 			// sql statement
+			pstmt = conn.prepareStatement(usql);
+			pstmt.executeUpdate();
 			pstmt = conn.prepareStatement(sql);
 			ResultSet rs = pstmt.executeQuery();
 			conn.commit();
