@@ -49,8 +49,8 @@ public class AddVisitServlet extends HttpServlet {
 	static final String PASS = "sesame80";
 	
 	// SQL statements
-	String usql = "INSERT INTO visit (PatientID, VisitDescription, VisitDate, Completed) VALUES (" + 
-			"(SELECT PatientID FROM patient WHERE FirstName = ? AND LastName = ?), ?, ?, false);";
+	String usql = "INSERT INTO visit (PatientID, VisitDescription, VisitDate, PhysicianID, Completed) VALUES (" + 
+			"(SELECT PatientID FROM patient WHERE FirstName = ? AND LastName = ?), ?, ?, ?, false);";
 
 	protected void doPost(HttpServletRequest request,
                         HttpServletResponse response)
@@ -62,6 +62,7 @@ public class AddVisitServlet extends HttpServlet {
 		String lastName = request.getParameter("patientLastName");
 		String description = request.getParameter("visitDescription");
 		String visitDate = request.getParameter("visitDate");
+		String physician = request.getParameter("dr");
 		
 		response.setContentType("text/html");   
 		PrintWriter out = response.getWriter();
@@ -84,6 +85,7 @@ public class AddVisitServlet extends HttpServlet {
 			pstmt.setString(2, lastName);
 			pstmt.setString(3, description);
 			pstmt.setString(4, visitDate);
+			pstmt.setString(5, physician);
 
 			int nrows = pstmt.executeUpdate();
 			conn.commit();
