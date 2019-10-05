@@ -68,9 +68,9 @@ CREATE TABLE IF NOT EXISTS `MedicalDB`.`Visit` (
     REFERENCES `MedicalDB`.`Patient` (`PatientID`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
-  CONSTRAINT `ConditionFK`
-    FOREIGN KEY (`ConditionID` , `PatientID`)
-    REFERENCES `MedicalDB`.`Condition` (`ConditionID` , `ConditionID`)
+  CONSTRAINT `ConditionFK_V`
+    FOREIGN KEY (`ConditionID`)
+    REFERENCES `MedicalDB`.`Condition` (`ConditionID`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `PhysicianFK`
