@@ -48,7 +48,10 @@ public class PatientProceduresServlet extends HttpServlet {
 	static final String PASS = "sesame80";
 	
 	// SQL statements
-	String sql = "SELECT FirstName, LastName, ProcedureDescription, ProcedureDate FROM patient NATURAL JOIN procedures "
+	String sql = "SELECT FirstName, LastName, ProcedureDescription, ProcedureDate, ph.PhysicianName as PhysicianName "
+			+ "FROM patient "
+			+ "NATURAL JOIN procedures p "
+			+ "Join physicians ph  ON p.PhysicianID = ph.PhysicianID "
 			+ "WHERE FirstName LIKE ? AND LastName LIKE ? AND ProcedureID LIKE ?";
 
 	protected void doPost(HttpServletRequest request,
@@ -91,13 +94,14 @@ public class PatientProceduresServlet extends HttpServlet {
 			conn.commit();
 			
 			out.println("<!DOCTYPE HTML><html><body>");
-			out.println("<table> <tr><th>First Name</th><th>Last Name</th> <th>Procedure Description</th><th>Procedure Date</th></tr>");
+			out.println("<table> <tr><th>First Name</th><th>Last Name</th> <th>Procedure Description</th><th>Procedure Date</th><th>Physician</th></tr>");
 			while (rs.next()) {
 				out.println("<tr>");
 				out.println("<td>"+rs.getString("FirstName")+"</td>");
 				out.println("<td>"+rs.getString("LastName")+"</td>");
 				out.println("<td>"+rs.getString("ProcedureDescription")+"</td>");
 				out.println("<td>"+rs.getString("ProcedureDate")+"</td>");
+				out.println("<td>"+rs.getString("PhysicianName")+"</td>");
 				out.println("</tr>");
 			}
 			rs.close();
