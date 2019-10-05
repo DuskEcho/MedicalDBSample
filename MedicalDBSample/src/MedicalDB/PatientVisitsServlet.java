@@ -48,9 +48,10 @@ public class PatientVisitsServlet extends HttpServlet {
 	static final String PASS = "sesame80";
 	
 	// SQL statements
-	String originalSql = "SELECT FirstName, LastName, VisitDescription, VisitDate\r\n" + 
+	String originalSql = "SELECT FirstName, LastName, ph.PhysicianName as PhysicianName, VisitDescription, VisitDate\r\n" + 
 			"FROM Patient p \r\n" + 
-			"JOIN visit v ON p.PatientId = v.PatientId"
+			"JOIN visit v ON p.PatientId = v.PatientId " +
+			"JOIN physicians ph on ph.`PhysicianID` = v.`PhysicianID`"
 			+ " WHERE FirstName LIKE ? AND LastName LIKE ? AND ";
 
 	protected void doPost(HttpServletRequest request,
@@ -102,11 +103,12 @@ public class PatientVisitsServlet extends HttpServlet {
 			
 			out.println("<!DOCTYPE HTML><html><body>");
 			out.println("<h1>" + completionStatus + "</h1>");
-			out.println("<table> <tr><th>First Name</th><th>Last Name</th> <th>Visit Summary</th><th>Visit Date</th></tr>");
+			out.println("<table> <tr><th>First Name</th><th>Last Name</th><th>Physician</th> <th>Visit Summary</th><th>Visit Date</th></tr>");
 			while (rs.next()) {
 				out.println("<tr>");
 				out.println("<td>"+rs.getString("FirstName")+"</td>");
 				out.println("<td>"+rs.getString("LastName")+"</td>");
+				out.println("<td>"+rs.getString("PhysicianName")+"</td>");
 				out.println("<td>"+rs.getString("VisitDescription")+"</td>");
 				out.println("<td>"+rs.getString("VisitDate")+"</td>");
 				out.println("</tr>");
