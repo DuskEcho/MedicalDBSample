@@ -1,4 +1,4 @@
-INSERT INTO conditions (ConditionDescription, CurrentlyActive, PatientID, TreatmentPlan, DiagnosedVisitID)
+INSERT INTO condition (ConditionDescription, CurrentlyActive, PatientID, TreatmentPlan, DiagnosedVisitID)
 VALUES ("Leg infection", true, 1, "Removal, replace with peg", 1),
 	("Headache from dehydration", false, 1, "resolved prior to visit", 1),
 	("Bruised ribs", true, 2, "rest", 2),
