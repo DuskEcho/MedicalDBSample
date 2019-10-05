@@ -68,7 +68,7 @@ CREATE TABLE IF NOT EXISTS `MedicalDB`.`Visit` (
     ON UPDATE NO ACTION,
   CONSTRAINT `ConditionFK_V`
     FOREIGN KEY (`ConditionID`)
-    REFERENCES `MedicalDB`.`Condition` (`ConditionID`)
+    REFERENCES `MedicalDB`.`Conditions` (`ConditionID`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `PhysicianFK`
@@ -80,9 +80,9 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `MedicalDB`.`Condition`
+-- Table `MedicalDB`.`Conditions`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `MedicalDB`.`Condition` (
+CREATE TABLE IF NOT EXISTS `MedicalDB`.`Conditions` (
   `ConditionID` INT NOT NULL AUTO_INCREMENT,
   `ConditionDescription` VARCHAR(45) NOT NULL,
   `CurrentlyActive` TINYINT NOT NULL,
