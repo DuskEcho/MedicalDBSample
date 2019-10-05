@@ -3,6 +3,8 @@
 -- Model: New Model    Version: 1.0
 -- MySQL Workbench Forward Engineering
 
+Start transaction;
+
 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0;
 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION';
@@ -39,10 +41,10 @@ ENGINE = InnoDB;
 -- Table `MedicalDB`.`Physicians`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `MedicalDB`.`Physicians` (
-  `PhysiciansID` INT NOT NULL AUTO_INCREMENT,
+  `PhysicianID` INT NOT NULL AUTO_INCREMENT,
   `PhysicianName` VARCHAR(45) NOT NULL,
   `ContactNumber` VARCHAR(45) NOT NULL,
-  PRIMARY KEY (`PhysiciansID`))
+  PRIMARY KEY (`PhysicianID`))
 ENGINE = InnoDB;
 
 
@@ -60,7 +62,7 @@ CREATE TABLE IF NOT EXISTS `MedicalDB`.`Visit` (
   PRIMARY KEY (`VisitID`),
   INDEX `PatientID_idx` (`PatientID` ASC) VISIBLE,
   INDEX `FK_Condition_idx` (`ConditionID` ASC, `PatientID` ASC) VISIBLE,
-  INDEX `PhysicianFK_idx` (`PhysiciansID` ASC) VISIBLE,
+  INDEX `PhysicianFK_idx` (`PhysicianID` ASC) VISIBLE,
   CONSTRAINT `PatientID`
     FOREIGN KEY (`PatientID`)
     REFERENCES `MedicalDB`.`Patient` (`PatientID`)
@@ -71,9 +73,9 @@ CREATE TABLE IF NOT EXISTS `MedicalDB`.`Visit` (
     REFERENCES `MedicalDB`.`Conditions` (`ConditionID`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
-  CONSTRAINT `PhysicianFK`
-    FOREIGN KEY (`PhysiciansID`)
-    REFERENCES `MedicalDB`.`Physicians` (`PhysiciansID`)
+  CONSTRAINT `VisitPhysicianFK`
+    FOREIGN KEY (`PhysicianID`)
+    REFERENCES `MedicalDB`.`Physicians` (`PhysicianID`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
@@ -115,11 +117,11 @@ CREATE TABLE IF NOT EXISTS `MedicalDB`.`Procedures` (
   `ConditionID` INT NOT NULL,
   `Result` VARCHAR(45) NOT NULL,
   `PatientID` INT NOT NULL,
-  `PhysiciansID` INT NOT NULL,
+  `PhysicianID` INT NOT NULL,
   PRIMARY KEY (`ProcedureID`),
   INDEX `PatientFK_idx` (`PatientID` ASC) VISIBLE,
   INDEX `ConditionFK_idx` (`ConditionID` ASC) VISIBLE,
-  INDEX `PhysiciansFK_idx` (`PhysiciansID` ASC) VISIBLE,
+  INDEX `PhysicianFK_idx` (`PhysicianID` ASC) VISIBLE,
   CONSTRAINT `PatientFK`
     FOREIGN KEY (`PatientID`)
     REFERENCES `MedicalDB`.`Patient` (`PatientID`)
@@ -130,9 +132,9 @@ CREATE TABLE IF NOT EXISTS `MedicalDB`.`Procedures` (
     REFERENCES `MedicalDB`.`Condition` (`ConditionID`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
-  CONSTRAINT `PhysiciansFK`
-    FOREIGN KEY (`PhysiciansID`)
-    REFERENCES `MedicalDB`.`Physicians` (`PhysiciansID`)
+  CONSTRAINT `PhysicianFK`
+    FOREIGN KEY (`PhysicianID`)
+    REFERENCES `MedicalDB`.`Physicians` (`PhysicianID`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
