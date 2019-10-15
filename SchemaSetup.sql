@@ -31,7 +31,7 @@ CREATE TABLE IF NOT EXISTS `MedicalDB`.`Patient` (
   `EmergencyFirstName` VARCHAR(45) NOT NULL,
   `EmergencyLastName` VARCHAR(45) NOT NULL,
   `Weight` DECIMAL(5,2) NOT NULL,
-  `Height` DECIMAL(3,2) NOT NULL,
+  `Height` INT NOT NULL,
   `BloodType` VARCHAR(45) NOT NULL,
   PRIMARY KEY (`PatientID`))
 ENGINE = InnoDB;
