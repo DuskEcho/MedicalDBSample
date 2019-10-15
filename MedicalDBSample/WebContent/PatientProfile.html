@@ -1,0 +1,100 @@
+<!--
+Dalia Faria
+SAGA (Team 2)
+ 
+The following html is required for Patient Profile page.
+Interacts with SearchProfileServlet and AddProfileServlet.
+-->
+
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="ISO-8859-1">
+		<title>SAGA MDB - Patient Profile</title>
+	</head>
+	<body>
+		<h1> Patient Profile</h1>
+		
+		<h2>Search for Patient</h2>
+		<p>Birth year in format 'YYYY' without quotes.<br/>
+		Phone number in format '###-###-####' without quotes.</p>
+		<form action="SearchProfileServlet" method="POST"> <!-- post hides sensitive information in URL --> 
+		<table>
+			<tr>
+				<th>First Name</th>
+				<td><input type="text" name="patientFirstName"/></td>
+			</tr>
+			<tr>
+				<th>Last Name</th>
+				<td><input type="text" name="patientLastName"/></td>
+			</tr>
+			<tr>
+				<th>Patient ID</th>
+				<td><input type="text" name="patientID"/></td>
+			</tr>
+			<tr>
+				<th>Birth Year</th>
+				<td><input type="text" name="birthday"/></td>
+			</tr>
+			<tr>
+				<th>Phone Number</th>
+				<td><input type="text" name="phone"/></td>
+			</tr>   
+		
+		</table>
+		<br/>
+		<input type=submit value="Submit"/>
+	</form>
+	
+	<br/>
+	
+		<h2>Log New Patient</h2>
+		<h4>All fields, except Emergency Contact are required.</h4>
+		<p>Birth year in format 'YYYY' without quotes.<br/>
+		Phone number in format '###-###-####' without quotes.<br/>
+		Weight in format '0.00' without quotes.</p>
+		<form action="AddProfileServlet" method="POST"> <!-- post hides sensitive information in URL --> 
+		<table>
+			<tr>
+				<th>First Name</th>
+				<td><input type="text" name="patientFirstName"/></td>
+			</tr>
+			<tr>
+			    <th>Last Name</th>
+			    <td><input type="text" name="patientLastName"/></td>
+			</tr>
+			<tr>
+				<th>Birth Year</th>
+				<td><input type="text" name="birthday"/></td>
+			</tr>
+            <tr> 
+            	<th>Phone Number</th>
+            	<td><input type="text" name="phone"/></td>
+            </tr>
+            <tr> 
+            	<th>Emergency First Name</th>
+            	<td><input type="text" name="emergencyFirst"/></td>
+            </tr>
+            <tr>  
+            	<th>Emergency Last Name</th>
+            	<td><input type="text" name="emergencyLast"/></td>
+            </tr>
+            <tr>  
+            	<th>Weight(lbs)</th>
+            	<td><input type="text" name="weight"/></td>
+            </tr>
+            <tr> 
+            	<th>Height(in)</th>
+            	<td><input type="text" name="height"/></td>
+            </tr>
+            <tr>  
+            	<th>Blood Type(+/-)</th>
+            	<td><input type="text" name="bloodtype"/></td>            
+            </tr>
+		</table>
+		<br/>
+    	<input type="submit" value = "Submit"/>
+	</form>
+
+</body>
+</html>

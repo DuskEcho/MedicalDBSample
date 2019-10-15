@@ -1,0 +1,92 @@
+<!--
+Dalia Faria
+SAGA (Team 2)
+ 
+The following html is required for Patient Conditions page.
+Interacts with SearchConditionHistoryServlet, FindOnConditionServlet,
+and AddConditionServlet.
+-->
+
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="ISO-8859-1">
+		<title>SAGA MDB - Conditions</title>
+	</head>
+	<body>
+		<h1> Patient Conditions</h1>
+
+		<h2>Search Patient Condition History</h2>
+		<form action="PatientConditionsServlet"  method="POST"> <!-- post hides sensitive information in URL --> 
+			<table>
+				<tr>
+					<th>First Name</th>
+					<td><input type="text" name="patientFirstName"/></td>
+				</tr>
+				<tr>
+					<th>Last Name</th>
+					<td><input type="text" name="patientLastName"/></td>
+				</tr>
+				<tr>
+					<th>Patient ID (if known)</th>
+					<td><input type="text" name="patientID"/></td>
+				</tr>
+			</table>
+			<br/>
+			<input type=submit value="Submit"/>
+		</form>
+	
+		<br/>
+	
+		<h2>Find Patient Based on Condition</h2>
+		<form action="PatientConditionsServlet"  method="POST"> <!-- post hides sensitive information in URL --> 
+			<table>
+				<tr>
+					<th>Condition Description</th>
+					<td><input type="text" name="conditionDescription"/></td>
+				</tr>
+				<tr>
+					<th>Condition ID (if known)</th>
+					<td><input type="text" name="conditionID"/></td>
+				</tr>
+			</table>
+			<br/>
+			<input type=submit value="Submit"/>
+		</form>
+	
+		<br/>
+
+		<h2>Log New Condition for Patient</h2>
+		<form action="PatientConditionsServlet" method="POST"> <!-- post hides sensitive information in URL --> 
+		<table>
+			<tr>
+				<th>First Name</th>
+				<td><input type="text" name="patientFirstName"/></td>
+			</tr>
+			<tr>
+				<th>Last Name</th>
+				<td><input type="text" name="patientLastName"/></td>
+			</tr>
+			<tr>
+				<th>Patient ID</th>
+				<td><input type="text" name="patientID"/></td>
+			</tr>
+			<tr>
+				<th>Condition Description</th>
+				<td><input type="text" name="conditionDescription"/></td>
+			</tr>
+			<tr>
+                <th>Treatment Plan</th>
+                <td><input type="text" name="treatmentPlan"/></td>
+            </tr>
+            <tr>
+                <th>Diagnosed Visit ID</th>
+                <td><input type="text" name="diagnosedVisitID"/></td>
+			</tr>
+		</table>
+		<br/>
+		<input type=submit value="Submit"/>
+	</form>
+
+</body>
+</html>
