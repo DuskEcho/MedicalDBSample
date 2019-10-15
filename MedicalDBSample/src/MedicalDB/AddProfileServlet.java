@@ -43,8 +43,8 @@ public class AddProfileServlet extends HttpServlet {
 	static final String DB_URL = "jdbc:mysql://localhost/medicaldb";
 
 	// Database credentials
-	static final String USER = "root";
-	static final String PASS = "Dab23388!";
+	static final String USER = "user";
+	static final String PASS = "sesame80";
 	
 	// SQL statements
 	String sql = "INSERT INTO patient(FirstName, LastName, Bday, Phone, EmergencyFirstName, EmergencyLastName, Weight, Height, BloodType)\r\n" + 
