@@ -1,0 +1,6 @@
+LIFE V1.0 Custom
+(Low Investment Foundational Electronic-Health-Record)
+
+LIFE V1.0 is designed to address the need for low cost, electronic health record software. Around the world, medical organizations with limited financial resources are forced to use outdated software or even worse: forgo the benefits of electronic records and rely on paper.
+
+This custom edition is designed specifically for a non-profit homeless clinic in a small town. Tailored to fit the specifications set forth by the community medical director, LIFE V1.0 has enough capacity to handle the general practice needs of a smaller facility. It removes unused features that would only be applicable to a larger hospital (ie: surgical procedures, in-patient planning,etc). This keeps the costs down, while keeping the software efficient and simple.
