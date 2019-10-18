@@ -8,8 +8,9 @@
  * 
  * Precondition: No fields are required. PatientProfile.html
  * and database schema must be set up prior to
- * program run. Root password must be set to local server
- * and jdk version must be set to user's jdk version.
+ * program run. Server credentials must be set to "user" and 
+ * password must be set to local host's password or "sesame80" as below.
+ * Jdk version must be set to your current jdk version.
  * 
  * Postcondition: An overview of all patients in the database
  * will show if no input fields contain any value. Search will
@@ -45,8 +46,8 @@ public class SearchProfileServlet extends HttpServlet {
 	static final String DB_URL = "jdbc:mysql://localhost/medicaldb";
 
 	// Database credentials
-	static final String USER = "root";
-	static final String PASS = "Dab23388!";
+	static final String USER = "user";
+	static final String PASS = "sesame80";
 	
 	// SQL statements
 	String sql = "SELECT * FROM patient WHERE FirstName LIKE ? AND LastName Like ?"
@@ -110,9 +111,9 @@ public class SearchProfileServlet extends HttpServlet {
 					+ "<th>Weight(lbs)</th><th>Height(in)</th><th>Blood Type</th></tr>");
 			while (rs.next()) {
 				out.println("<tr>");
-				out.println("<td>"+rs.getString("PatientID")+"</td>");
 				out.println("<td>"+rs.getString("FirstName")+"</td>");
 				out.println("<td>"+rs.getString("LastName")+"</td>");
+				out.println("<td>"+rs.getString("PatientID")+"</td>");
 				out.println("<td>"+rs.getString("Bday")+"</td>");
 				out.println("<td>"+rs.getString("Phone")+"</td>");
 				out.println("<td>"+rs.getString("EmergencyFirstName")+"</td>");

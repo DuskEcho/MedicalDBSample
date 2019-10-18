@@ -17,7 +17,7 @@ and AddConditionServlet.
 		<h1> Patient Conditions</h1>
 
 		<h2>Search Patient Condition History</h2>
-		<form action="PatientConditionsServlet"  method="POST"> <!-- post hides sensitive information in URL --> 
+		<form action="SearchConditionHistoryServlet"  method="POST"> <!-- post hides sensitive information in URL --> 
 			<table>
 				<tr>
 					<th>First Name</th>
@@ -39,7 +39,7 @@ and AddConditionServlet.
 		<br/>
 	
 		<h2>Find Patient Based on Condition</h2>
-		<form action="PatientConditionsServlet"  method="POST"> <!-- post hides sensitive information in URL --> 
+		<form action="FindOnConditionServlet"  method="POST"> <!-- post hides sensitive information in URL --> 
 			<table>
 				<tr>
 					<th>Condition Description</th>
@@ -57,16 +57,10 @@ and AddConditionServlet.
 		<br/>
 
 		<h2>Log New Condition for Patient</h2>
-		<form action="PatientConditionsServlet" method="POST"> <!-- post hides sensitive information in URL --> 
+		<h4>Existing Patient Only. Log new patient <a href="PatientProfile.html">here</a>.</h4>
+		<p>All fields are required.<br/>Assumes new condition is currently active.</p>
+		<form action="AddConditionServlet" method="POST"> <!-- post hides sensitive information in URL --> 
 		<table>
-			<tr>
-				<th>First Name</th>
-				<td><input type="text" name="patientFirstName"/></td>
-			</tr>
-			<tr>
-				<th>Last Name</th>
-				<td><input type="text" name="patientLastName"/></td>
-			</tr>
 			<tr>
 				<th>Patient ID</th>
 				<td><input type="text" name="patientID"/></td>
@@ -82,6 +76,32 @@ and AddConditionServlet.
             <tr>
                 <th>Diagnosed Visit ID</th>
                 <td><input type="text" name="diagnosedVisitID"/></td>
+			</tr>
+		</table>
+		<br/>
+		<input type=submit value="Submit"/>
+	</form>
+	
+	<h2>Update Condition Status for Patient</h2>
+	<p>All fields are required <br/> in case of identically named patients or multiple conditions.</p>
+		<form action="UpdateConditionServlet" id = "UpdateStatus" method="POST"> <!-- post hides sensitive information in URL --> 
+		<table>
+			<tr>
+				<th>Patient ID</th>
+				<td><input type="text" name="patientID"/></td>
+			</tr>
+			<tr>
+				<th>Condition ID</th>
+				<td><input type="text" name="conditionID"/></td>
+			</tr>
+			<tr>
+				<th>Currently Active</th>
+				<td>
+				<select name="currentlyactive" form="UpdateStatus">
+							<option value="Yes">Yes</option>
+							<option value="No">No</option>
+						</select>
+				</td>
 			</tr>
 		</table>
 		<br/>

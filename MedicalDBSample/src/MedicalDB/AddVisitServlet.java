@@ -45,7 +45,7 @@ public class AddVisitServlet extends HttpServlet {
 	static final String DB_URL = "jdbc:mysql://localhost/medicaldb";
 
 	// Database credentials
-	static final String USER = "root";
+	static final String USER = "user";
 	static final String PASS = "sesame80";
 	
 	// SQL statements
@@ -92,7 +92,7 @@ public class AddVisitServlet extends HttpServlet {
 			
 			out.println("<!DOCTYPE HTML><html><body>");
 			out.println("<p>" + nrows + " Rows Updated</p>");
-			out.println("<a href=\"Home.html\">Back to the homepage</a>");
+			out.println("<p>Click <a href=\"PatientConditions.html\">here</a> to report conditions.</p>");
 			
 			pstmt.close();
 			conn.close();

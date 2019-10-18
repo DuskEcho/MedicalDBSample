@@ -44,7 +44,7 @@ public class PatientProceduresServlet extends HttpServlet {
 	static final String DB_URL = "jdbc:mysql://localhost/medicaldb";
 
 	// Database credentials
-	static final String USER = "root";
+	static final String USER = "user";
 	static final String PASS = "sesame80";
 	
 	// SQL statements
