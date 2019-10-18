@@ -15,7 +15,7 @@ SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,N
 
 -- Set up user/pass for servlet use --
 
-CREATE USER 'user'@'localhost' IDENTIFIED BY 'sesame80';
+CREATE USER IF NOT EXISTS 'user'@'localhost' IDENTIFIED BY 'sesame80';
 GRANT ALL ON medicaldb.* TO 'user'@'localhost';
 
 -- -----------------------------------------------------
