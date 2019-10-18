@@ -1,3 +1,5 @@
+-- Greg Brown
+-- SAGA
 -- The following query is used to display a/many procedure(s) for a patient
 -- Patient name, description, date, and physician are shown as part 
 -- of the summary
