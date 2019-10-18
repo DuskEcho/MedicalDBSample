@@ -6,8 +6,8 @@
 -- has already been completed.
 --
 --  In the servlet, the last two line is in form:
--- "(SELECT PatientID FROM patient WHERE FirstName = ? AND LastName = ?), ?, ?, ?, false);"
+-- "(SELECT PatientID FROM patient WHERE PatientID = ?), ?, ?, ?, false);"
 -- Actual values are given here for quick-testing
 
 INSERT INTO visit (PatientID, VisitDescription, VisitDate, PhysicianID, Completed) VALUES (
-(SELECT PatientID FROM patient WHERE FirstName = "Frank" AND LastName = "Redbeard"), "wobbly peg", "2019-10-05", 1, false);
+(SELECT PatientID FROM patient WHERE PatientID = "1"), "wobbly peg", "2019-10-05", 1, false);

@@ -6,11 +6,8 @@
 -- and identifications of current events and can be used for both
 -- pattern exploration and decisionmaking (when to staff, common problems)
 
-CREATE VIEW RecentActivity as
-(SELECT LastName, FirstName, ConditionDescription, VisitDate
-FROM visit v
-JOIN patient pa ON v.PatientID = pa.PatientId
-JOIN conditions c ON v.PatientID = c.patientID
-WHERE c.CurrentlyActive = true
-ORDER BY VisitDate DESC);
-SELECT * FROM RecentActivity;
+CREATE OR REPLACE VIEW RecentActivity as
+            (SELECT FirstName, LastName, ConditionDescription, VisitDate, CurrentlyActive
+            FROM patient p JOIN conditions c ON p.PatientID = c.PatientID JOIN visit v
+            ON c.DiagnosedVisitID = v.VisitID
+            ORDER BY VisitDate DESC);

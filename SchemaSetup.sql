@@ -142,8 +142,6 @@ SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
 
-
-    
 INSERT INTO physicians (PhysicianName, ContactNumber, PhysicianID)
 VALUES ("Stephen Strange", "555-555-5551", 1),
         ("Mario", "555-555-5552", 2),
@@ -162,41 +160,42 @@ VALUES (1, "Frank", "Redbeard", 1950-01-01, "111-111-1111", "", "", 185.0, 59, "
  (10, "John", "Bercow", 1963-01-19, "111-222-3333", "Sally", "Bercow", 160.0, 55, "O-");
 
 INSERT INTO visit (VisitDescription, VisitDate, Completed, PatientID, PhysicianID)
-VALUES ("Leg complaint, eye complaint", "2010-09-01", true, 1, 2),
+VALUES ("Leg complaint, eye complaint", "2010-09-01", false, 1, 2),
+	("headache or migraine", "2010-08-26", true, 2, 3),
 	("chest pain", "2010-08-26", true, 2, 1),
     ("soreness in arm", "2010-08-29", false, 3, 3),
     ("pain when walking", "2010-09-02", true, 4, 3),
     ("difficulty sleeping", "2010-09-01", true, 5, 3),
     ("Difficulty breathing, difficulty walking", "2010-07-16", true, 6, 1),
-    ("Follow up to visit from 2010-07-16", "2010-07-23", false, 6, 1),
-    ("Discoloration in veins", "2010-08-29", true, 7, 3),
+    ("Follow up to visit", "2010-07-23", true, 6, 1),
+    ("Discoloration in veins", "2010-08-29", false, 7, 3),
     ("'fingers smell like chicken'", "2010-09-04", true, 9, 2);
-    
-
 
 INSERT INTO conditions (ConditionDescription, CurrentlyActive, PatientID, TreatmentPlan, DiagnosedVisitID)
 VALUES ("Leg infection", true, 1, "Removal, replace with peg", 1),
-	("Headache from dehydration", false, 1, "resolved prior to visit", 1),
-	("Bruised ribs", true, 2, "rest", 2),
-    ("Ankle sprain", true, 4, "RICE", 4),
-    ("Stress", true, 5, "vacation", 5),
-    ("Fractured ribs", true, 6, "Referred to hospital for immediate care", 6),
-    ("Possible spine abnormality", true, 6, "Referred to hospital for immediate care", 6),
-    ("Broken leg", true, 6, "Referred to hospital for immediate care", 6),
-    ("Unknown pathogen", true, 7, "Referred to lab for analysis", 8),
-    ("Patient is an imbecile", true, 9, "Don't sniff fingers after eating chicken", 9);
+	("Headache from dehydration", false, 2, "resolved prior to visit", 2),
+	("Bruised ribs", false, 2, "rest", 2),
+    ("Broken arm", true, 3, "requires arm cast for recovery", 4),
+    ("Ankle sprain", false, 4, "RICE", 5),
+    ("Stress", false, 5, "vacation", 6),
+    ("Fractured ribs", false, 6, "Referred to hospital for immediate care", 7),
+    ("Possible spine abnormality", false, 6, "Referred to hospital for immediate care", 7),
+    ("Broken leg", false, 6, "Referred to hospital for immediate care", 7),
+    ("Unknown pathogen", true, 7, "Referred to lab for analysis", 9),
+    ("Patient is an imbecile", false, 9, "Don't sniff fingers after eating chicken", 10);
     
     insert into procedures (ProcedureDescription, ProcedureDate, ConditionID, Result, PatientID, PhysicianID)
-VALUES ("Ice Wrap", "2010-08-26", 3, "patient returned home", 2, 1),
-	("antibiotics", "2010-09-01", 1, "patient to seek further care", 1, 2),
-	("tylenol", "2010-09-01", 2, "resolved", 1, 2),
-	("wound clean/wrap", "2010-09-01", 1, "patient to seek further care", 1, 2),
+VALUES 	("antibiotics", "2010-09-01", 1, "patient to seek further care", 1, 2),
+    ("wound clean/wrap", "2010-09-01", 1, "patient to seek further care", 1, 2),
+    ("tylenol", "2010-09-01", 2, "patient to seek further care", 1, 2),
+    ("Ice Wrap", "2010-08-26", 3, "patient returned home", 2, 1),
 	("tylenol", "2010-08-26", 3, "patient returned home", 2, 3),
-	("Ice Wrap", "2010-09-02", 4, "patient returned home", 4, 3),
-	("tylenol", "2010-09-02", 4, "patient returned home", 4, 3),
-	("tylenol", "2010-07-16", 6, "patient referred to ER", 6, 1),
+    ("tylenol", "2010-08-29", 4, "patient to seek further care", 3, 1),
+	("Ice Wrap", "2010-09-02", 5, "patient returned home", 4, 3),
+	("tylenol", "2010-09-02", 5, "patient returned home", 4, 3),
+	("tylenol", "2010-07-16", 7, "patient referred to ER", 6, 1),
 	("splint", "2010-07-16", 8, "patient referred to ER", 6, 1),
-	("tylenol", "2010-07-16", 6, "patient referred to ER", 6, 1),
+	("tylenol", "2010-07-16", 9, "patient referred to ER", 6, 1),
 	("splint", "2010-07-16", 8, "patient referred to ER", 6, 1),
 	("blood draw", "2010-08-29", 9, "patient referred to lab", 7, 3);
 
