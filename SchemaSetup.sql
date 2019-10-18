@@ -62,20 +62,13 @@ CREATE TABLE IF NOT EXISTS `MedicalDB`.`Visit` (
   `VisitDate` DATE NOT NULL,
   `Completed` TINYINT NOT NULL,
   `PatientID` INT NOT NULL,
-  `ConditionID` INT NULL DEFAULT NULL,
   `PhysicianID` INT NOT NULL,
   PRIMARY KEY (`VisitID`),
   INDEX `PatientID_idx` (`PatientID` ASC) VISIBLE,
-  INDEX `FK_Condition_idx` (`ConditionID` ASC, `PatientID` ASC) VISIBLE,
   INDEX `PhysicianFK_idx` (`PhysicianID` ASC) VISIBLE,
   CONSTRAINT `PatientID`
     FOREIGN KEY (`PatientID`)
     REFERENCES `MedicalDB`.`Patient` (`PatientID`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT `ConditionFK_V`
-    FOREIGN KEY (`ConditionID`)
-    REFERENCES `MedicalDB`.`Conditions` (`ConditionID`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `VisitPhysicianFK`
