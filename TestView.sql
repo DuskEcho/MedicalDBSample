@@ -1,3 +1,7 @@
+--  The following view is intended to give an overview of recent occurrences. 
+--  Patients, visits, and associated conditions are displayed in descending order
+--  by date
+
 CREATE VIEW RecentActivity as
 (SELECT LastName, FirstName, ConditionDescription, VisitDate
 FROM visit v

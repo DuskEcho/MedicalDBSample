@@ -1,11 +1,13 @@
-# The following query is used to look up a patient's visits by most "recent".
-# In the case of appointments, appointments are displayed from
-# furthest out to closest. 
-#
-#  In the servlet, the last two lines are in form:
-# "WHERE FirstName LIKE ? AND LastName LIKE ? AND
-# v.Completed = ? ORDER BY VisitDate DESC;"
-# Actual values are given here for quick-testing
+-- Greg Brown
+-- SAGA
+-- The following query is used to look up a patient's visits by most "recent".
+-- In the case of appointments, appointments are displayed from
+-- furthest out to closest. 
+--
+--  In the servlet, the last two lines are in form:
+-- "WHERE FirstName LIKE ? AND LastName LIKE ? AND
+-- v.Completed = ? ORDER BY VisitDate DESC;"
+-- Actual values are given here for quick-testing
 
 
 SELECT FirstName, LastName, ph.PhysicianName as PhysicianName, VisitDescription, VisitDate
