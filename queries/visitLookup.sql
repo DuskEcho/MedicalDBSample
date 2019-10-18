@@ -1,3 +1,5 @@
+-- Greg Brown
+-- SAGA
 -- The following query is used to look up a patient's visits by most "recent".
 -- In the case of appointments, appointments are displayed from
 -- furthest out to closest. 
