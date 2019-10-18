@@ -23,7 +23,6 @@ import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -34,8 +33,8 @@ import javax.servlet.http.HttpServletResponse;
 /**
  * Core servlet implementation
  */
-@WebServlet("/UpdateConditionServlet")
-public class UpdateConditionServlet extends HttpServlet {
+@WebServlet("/UpdateConditionCompletionServlet")
+public class UpdateConditionCompletionServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
     
 	// JDBC driver name and database URL
@@ -46,8 +45,6 @@ public class UpdateConditionServlet extends HttpServlet {
 	static final String USER = "user";
 	static final String PASS = "sesame80";
 	
-	String sql = "UPDATE conditions SET currentlyActive = ";
-	
 	protected void doPost(HttpServletRequest request,
                         HttpServletResponse response)
 			throws ServletException, IOException {
@@ -56,15 +53,23 @@ public class UpdateConditionServlet extends HttpServlet {
 		PreparedStatement pstmt = null;
 		String patientID = request.getParameter("patientID");
 		String conditionID = request.getParameter("conditionID");
+		String visitID = request.getParameter("visitID");
 		boolean currentlyActive = (request.getParameter("currentlyactive").contains("Yes"));
 		String conditionStatus = "0";
+		boolean completionStatus = (request.getParameter("completionStatus").contains("Yes"));
+		String completeStatus = "0";
 
 		if(currentlyActive)
 		{
 			conditionStatus = "1";
 		}
+		if(completionStatus)
+		{
+			completeStatus = "1";
+		}
 		
-		String addSql = sql + conditionStatus + " WHERE ConditionID = ? AND PatientID = ?;";
+		String sql = "UPDATE conditions SET currentlyActive = " + conditionStatus + " WHERE ConditionID = ? AND PatientID = ?;";
+		String addSql = "UPDATE visit SET Completed = " + completeStatus + " WHERE PatientID = ? AND VisitID = ?;";
 	
 		response.setContentType("text/html");   
 		PrintWriter out = response.getWriter();
@@ -82,16 +87,21 @@ public class UpdateConditionServlet extends HttpServlet {
 
 			// now prepare and execute update or insert 
 			// sql statement
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, conditionID);
+			pstmt.setString(2, patientID);
+			pstmt.executeUpdate();
 			pstmt = conn.prepareStatement(addSql);
 			pstmt.setString(1, patientID);
-			pstmt.setString(2, conditionID);
-			
+			pstmt.setString(2, visitID);
+			pstmt.executeUpdate();
 	
-			int nrows = pstmt.executeUpdate();
+			int conditionrows = pstmt.executeUpdate();
+			int completionrows = pstmt.executeUpdate();
 			conn.commit();
 			
 			out.println("<!DOCTYPE HTML><html><body>");
-			out.println("<p>" + nrows + " Rows Updated. Condition Status Saved.</p>");
+			out.println("<p>" + conditionrows + " Condition Rows Updated. " + completionrows + " Visit Rows Updated.<br/>Condition and Completion Status Saved.</p>");
 			
 			pstmt.close();
 			conn.close();

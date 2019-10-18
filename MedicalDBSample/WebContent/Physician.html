@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="ISO-8859-1">
+	<title>SAGA MDB - Physician Directory</title>
+</head>
+<body>
+	<h1> Physician Directory</h1>
+		<br/>
+	<h2>Look Up Physician Account Information</h2>
+	<p>Physician ID is numeric</p>
+	<p>Phone number in format '###-###-####' without quotes.</p>
+	<p>To see complete directory, leave blank and search.</p>
+	
+	<form action="PhysicianSearchServlet" method="POST"> <!-- post hides sensitive information in URL --> 
+		<table>
+			<tr>
+				<th>Physician ID</th>
+				<th>Physician Name</th>
+				<th>Phone Number</th>
+			</tr>
+			<tr>
+				<td><input type="number" name="physicianID" placeholder="ie: 1"/></td>
+				<td><input type="text" name="physicianName" placeholder="ie: Stephen Strange"/></td>
+				<td><input type="text" name="contactNumber" placeholder="ie: 555-555-5551"/></td>
+			</tr>
+		</table>
+		<br/>
+		<input type=submit value="Search"/>
+	</form>
+	<br/>
+		<h2>Physician Visit Log</h2>
+				<p>Physician ID is numeric</p>
+	<p>If unsure, please leave blank.</p>
+
+	<form action="PhysicianPatientSearchServlet" method="POST"> <!-- post hides sensitive information in URL --> 
+		<table>
+			<tr>
+				<th>Physician ID</th><th>Physician Name</th>
+				
+			</tr>
+			<tr>
+				<td><input type="number" name="DrID" placeholder="ie: 2"/></td>
+				<td><input type="text" name="DrName" placeholder="ie: Mario"/></td>
+
+			</tr>
+		</table>
+		<br/>
+		<input type=submit value="Search"/>
+	</form>
+	
+		<br/>
+		<h2>Add New Physician</h2>
+	<p>Phone number in format '###-###-####' without quotes.</p>
+	<p>Physician ID is generated automatically.</p>
+		<br/>
+
+	<form action="AddPhysicianServlet" method="POST"> <!-- post hides sensitive information in URL --> 
+		<table>
+			<tr>
+				<th>Physician Name</th>
+				<th>Phone Number</th>
+			</tr>
+			<tr>
+				
+				<td><input type="text" name="DrName" placeholder="Meredith Grey"/></td>
+			 	<td><input type="text" name="DrNumber" placeholder="ie: 555-555-5553"/></td>
+
+	
+			</tr>
+		</table>
+		<br/>
+		<input type=submit value="Add Doctor"/>
+	</form>
+
+		<br/>
+		<br/>
+	
+		
+			<a href=/MedicalDBSample/Home.html>Back to Home Page</a>
+
+
+
+		<br/>
+		<br/>
+	
+</body>
+</html>

@@ -82,9 +82,9 @@ and AddConditionServlet.
 		<input type=submit value="Submit"/>
 	</form>
 	
-	<h2>Update Condition Status for Patient</h2>
+	<h2>Update Condition/Completion Status for Patient</h2>
 	<p>All fields are required <br/> in case of identically named patients or multiple conditions.</p>
-		<form action="UpdateConditionServlet" id = "UpdateStatus" method="POST"> <!-- post hides sensitive information in URL --> 
+		<form action="UpdateConditionCompletionServlet" id = "UpdateStatus" method="POST"> <!-- post hides sensitive information in URL --> 
 		<table>
 			<tr>
 				<th>Patient ID</th>
@@ -95,9 +95,22 @@ and AddConditionServlet.
 				<td><input type="text" name="conditionID"/></td>
 			</tr>
 			<tr>
+				<th>Visit ID</th>
+				<td><input type="text" name="visitID"/></td>
+			</tr>
+			<tr>
 				<th>Currently Active</th>
 				<td>
 				<select name="currentlyactive" form="UpdateStatus">
+							<option value="Yes">Yes</option>
+							<option value="No">No</option>
+						</select>
+				</td>
+			</tr>
+			<tr>
+			<th>Completion Status</th>
+				<td>
+				<select name="completionStatus" form="UpdateStatus">
 							<option value="Yes">Yes</option>
 							<option value="No">No</option>
 						</select>

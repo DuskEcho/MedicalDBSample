@@ -92,7 +92,7 @@ public class AddVisitServlet extends HttpServlet {
 			
 			out.println("<!DOCTYPE HTML><html><body>");
 			out.println("<p>" + nrows + " Rows Updated</p>");
-			out.println("<p>Click <a href=\"PatientConditions.html\">here</a> to report conditions.</p>");
+			out.println("<a href=\"Home.html\">Back to the homepage</a>");
 			
 			pstmt.close();
 			conn.close();
@@ -100,6 +100,7 @@ public class AddVisitServlet extends HttpServlet {
 		} catch (Exception e) {
 			// Handle errors
 			e.printStackTrace();
+			out.println("<h1>Check your input, try again.</h1>");
 		} // end try
 	}
 }

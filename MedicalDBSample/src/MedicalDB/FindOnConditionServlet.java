@@ -120,6 +120,7 @@ public class FindOnConditionServlet extends HttpServlet {
 		} catch (Exception e) {
 			// Handle errors
 			e.printStackTrace();
+			out.println("<h1>Check your input, try again.</h1>");
 		} // end try
 	}
 }
