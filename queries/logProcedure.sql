@@ -7,10 +7,9 @@
 -- (ID card, condition info "pulled up" on the monitor)
 --
 --  In the servlet, the last line is in form:
--- "(SELECT PatientID FROM patient WHERE FirstName = ? AND LastName = ?), ?, ?, ?, ?, ?"
+-- "(SELECT PatientID FROM patient WHERE PatientID = ?), ?, ?, ?, ?, ?"
 -- Actual values are given here for quick-testing
 
 INSERT INTO procedures (PatientID, ProcedureDescription, ProcedureDate, ConditionID, Result, PhysicianID)
 VALUES (
-(SELECT PatientID FROM patient WHERE FirstName = "Frank" AND LastName = "Redbeard"), "New Peg", "2012-01-01", 1, "Ready to sail", 1
-);
+(SELECT PatientID FROM patient WHERE PatientID = "1"), "New Peg", "2012-01-01", 1, "Ready to sail", 1);
